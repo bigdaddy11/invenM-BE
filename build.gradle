@@ -33,16 +33,17 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	// Lombok 및 기타 의존성
-    compileOnly 'org.projectlombok:lombok:1.18.26'
-    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
     options.release.set(21)
 	options.compilerArgs << '-parameters'
+	options.forkOptions.executable = "${System.getenv('JAVA_HOME')}/bin/javac"
 }
