@@ -18,6 +18,8 @@ logging:
     level:
         org:
             hibernate:
-                sql: DEBUG
+                sql: INFO
                 tool:
-                    hbm2ddl: TRACE
+                    hbm2ddl: INFO
+            springframework: INFO
+        root: INFO
