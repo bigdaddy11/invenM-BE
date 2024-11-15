@@ -23,3 +23,6 @@ logging:
                     hbm2ddl: INFO
             springframework: INFO
         root: INFO
+
+server:
+    port: 9090
