@@ -74,6 +74,10 @@ public class CustomerController {
                 existingCustomer.setContact(customerDetails.getContact());
                 existingCustomer.setAddress(customerDetails.getAddress());
                 existingCustomer.setIsActive(customerDetails.getIsActive());
+                existingCustomer.setCeoName(customerDetails.getCeoName());
+                existingCustomer.setRepName(customerDetails.getRepName());
+                existingCustomer.setBankAcount(customerDetails.getBankAcount());
+                existingCustomer.setLicense(customerDetails.getLicense());
                 customerService.saveCustomer(existingCustomer); // 업데이트 후 저장
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)

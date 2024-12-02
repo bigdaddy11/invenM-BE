@@ -48,6 +48,50 @@ public class Customer {
     @Size(max = 50)
     private String createdBy;
 
+    @Size(max = 10)
+    private String ceoName; //대표자명
+
+    @Size(max = 100)
+    private String repName; //담당자명
+
+    @Size(max = 100)
+    private String bankAcount;  //통장사본
+
+    @Size(max = 100)
+    private String license;  //사업자등록증
+
+    public String getCeoName() {
+        return ceoName;
+    }
+
+    public void setCeoName(String ceoName) {
+        this.ceoName = ceoName;
+    }
+
+    public String getRepName() {
+        return repName;
+    }
+
+    public void setRepName(String repName) {
+        this.repName = repName;
+    }
+
+    public String getBankAcount() {
+        return bankAcount;
+    }
+
+    public void setBankAcount(String bankAcount) {
+        this.bankAcount = bankAcount;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
     public Long getId() {
         return id;
     }
