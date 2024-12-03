@@ -5,19 +5,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import com.main.invenmbe.entity.Customer;
 import com.main.invenmbe.entity.Invoice;
 import com.main.invenmbe.service.InvoiceService;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/invoices")
 public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
+
+    @GetMapping
+    public List<Invoice> getAllCustomers() {
+        return invoiceService.getAllInvoice();
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<List<Invoice>> getInvoicesByCustomerId(@PathVariable Long id) {

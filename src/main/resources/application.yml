@@ -18,7 +18,11 @@ logging:
     level:
         org:
             hibernate:
-                sql: INFO
+                SQL: INFO
+                type:
+                    descriptor:
+                        sql:
+                            BasicBinder: INFO
                 tool:
                     hbm2ddl: INFO
             springframework: INFO

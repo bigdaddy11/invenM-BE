@@ -75,7 +75,10 @@ public class CustomerController {
                 existingCustomer.setAddress(customerDetails.getAddress());
                 existingCustomer.setIsActive(customerDetails.getIsActive());
                 existingCustomer.setCeoName(customerDetails.getCeoName());
-                existingCustomer.setRepName(customerDetails.getRepName());
+                existingCustomer.setRepName1(customerDetails.getRepName1());
+                existingCustomer.setRepName2(customerDetails.getRepName2());
+                existingCustomer.setRepNumber1(customerDetails.getRepNumber1());
+                existingCustomer.setRepNumber2(customerDetails.getRepNumber2());
                 existingCustomer.setBankAcount(customerDetails.getBankAcount());
                 existingCustomer.setLicense(customerDetails.getLicense());
                 customerService.saveCustomer(existingCustomer); // 업데이트 후 저장

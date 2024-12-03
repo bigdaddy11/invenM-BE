@@ -11,8 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.main.invenmbe.entity.InvoiceDetail;
 import com.main.invenmbe.repository.InvoiceDetailRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
 @Service
 public class InvoiceDetailService {
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private final InvoiceDetailRepository invoiceDetailRepository;
 
@@ -31,7 +36,7 @@ public class InvoiceDetailService {
 
     // 송장 ID로 상세 조회
     public List<InvoiceDetail> getDetailsByInvoiceId(Long invoiceId) {
-        return invoiceDetailRepository.findByInvoiceId(invoiceId);
+        return invoiceDetailRepository.InvoiceDetailWithExtraFields(invoiceId);
     }
 
     public void updateInvoiceDetails(List<InvoiceDetail> invoiceDetails) {
@@ -53,6 +58,7 @@ public class InvoiceDetailService {
                 updatedDetail.setRecipientPhone2(detail.getRecipientPhone2());
                 updatedDetail.setRecipientZipcode(detail.getRecipientZipcode());
                 updatedDetail.setRecipientAddress(detail.getRecipientAddress());
+                updatedDetail.setCustomerId(detail.getCustomerId());
                 updatedDetail.setDeliveryMessage(detail.getDeliveryMessage());
                 updatedDetail.setDeliveryCompany(detail.getDeliveryCompany()); // 택배사
                 updatedDetail.setTrackingNumber(detail.getTrackingNumber()); // 운송장번호

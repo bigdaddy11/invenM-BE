@@ -40,7 +40,7 @@ public class InvoiceDetailController {
 
     // 특정 송장 상세 조회
     @GetMapping("/{invoiceId}")
-    public ResponseEntity<List<InvoiceDetail>> getInvoiceDetailsByInvoiceId(@PathVariable Long invoiceId) {
+    public ResponseEntity<List<InvoiceDetail>> getInvoiceDetailsByInvoiceId(@PathVariable("invoiceId") Long invoiceId) {
         try {
             List<InvoiceDetail> details = invoiceDetailService.getDetailsByInvoiceId(invoiceId);
             return ResponseEntity.ok(details);

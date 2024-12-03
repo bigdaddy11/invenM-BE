@@ -23,9 +23,15 @@ public class ProductController {
     @Autowired
     private ObjectMapper objectMapper;
 
+    // 모든 거래처의 상품 목록 조회
+    @GetMapping
+    public List<Product> getAllProducts() {
+        return productService.getAllProducts();
+    }
+
     // 특정 거래처의 활성화된 상품 목록 조회
     @GetMapping("/{customerId}")
-    public List<Product> getProducts(@PathVariable Long customerId) {
+    public List<Product> getProducts(@PathVariable("customerId") Long customerId) {
         return productService.getActiveProductsByCustomerId(customerId);
     }
 

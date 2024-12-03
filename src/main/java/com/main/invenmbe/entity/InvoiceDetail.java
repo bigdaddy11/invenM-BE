@@ -12,11 +12,27 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "invoice_detail")
+@SqlResultSetMapping(
+    name = "InvoiceDetailWithExtraFields",
+    entities = @EntityResult(entityClass = InvoiceDetail.class),
+    columns = {
+        @ColumnResult(name = "customer_name", type = String.class),
+        @ColumnResult(name = "product_name", type = String.class)
+    }
+)
 public class InvoiceDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "customerId", referencedColumnName = "id", insertable = false, updatable = false)
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "productCode", referencedColumnName = "productCode", insertable = false, updatable = false)
+    private Product product;
 
     @NotNull
     private Long customerId; // 거래처 ID
@@ -54,10 +70,33 @@ public class InvoiceDetail {
     private LocalDateTime updatedDate;
 
     @Size(max = 50)
+    @Column(name = "created_by")
     private String createdBy;
 
     @Transient // DB에 저장되지 않음
     private Boolean isNew;
+
+    @Transient // DB에 저장되지 않음
+    private String customerName;
+
+    @Transient // DB에 저장되지 않음
+    private String invoiceName;
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getInvoiceName() {
+        return invoiceName;
+    }
+
+    public void setInvoiceName(String invoiceName) {
+        this.invoiceName = invoiceName;
+    }
 
     public Long getId() {
         return id;

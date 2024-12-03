@@ -43,6 +43,11 @@ public class ProductService {
         return productRepository.findAllByCustomerIdOrderByProductCodeAsc(customerId);
     }
 
+    // 모든 거래처의 상품 목록 조회
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
     // 단일 상품 저장
     public Product save(Product product) {
         if (product.getProductCode() == null) {

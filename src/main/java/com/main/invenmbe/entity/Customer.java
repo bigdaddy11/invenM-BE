@@ -52,7 +52,16 @@ public class Customer {
     private String ceoName; //대표자명
 
     @Size(max = 100)
-    private String repName; //담당자명
+    private String repName1; //담당자명1
+
+    @Size(max = 100)
+    private String repName2; //담당자명2
+
+    @Size(max = 20)
+    private String repNumber1;  //담당자번호1
+
+    @Size(max = 20)
+    private String repNumber2;  //담당자번호2
 
     @Size(max = 100)
     private String bankAcount;  //통장사본
@@ -60,20 +69,44 @@ public class Customer {
     @Size(max = 100)
     private String license;  //사업자등록증
 
+    public String getRepName1() {
+        return repName1;
+    }
+
+    public void setRepName1(String repName1) {
+        this.repName1 = repName1;
+    }
+
+    public String getRepName2() {
+        return repName2;
+    }
+
+    public void setRepName2(String repName2) {
+        this.repName2 = repName2;
+    }
+
+    public String getRepNumber1() {
+        return repNumber1;
+    }
+
+    public void setRepNumber1(String repNumber1) {
+        this.repNumber1 = repNumber1;
+    }
+
+    public String getRepNumber2() {
+        return repNumber2;
+    }
+
+    public void setRepNumber2(String repNumber2) {
+        this.repNumber2 = repNumber2;
+    }
+
     public String getCeoName() {
         return ceoName;
     }
 
     public void setCeoName(String ceoName) {
         this.ceoName = ceoName;
-    }
-
-    public String getRepName() {
-        return repName;
-    }
-
-    public void setRepName(String repName) {
-        this.repName = repName;
     }
 
     public String getBankAcount() {

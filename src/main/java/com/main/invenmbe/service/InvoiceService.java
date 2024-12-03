@@ -4,22 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.main.invenmbe.entity.Customer;
 import com.main.invenmbe.entity.Invoice;
 import com.main.invenmbe.repository.InvoiceRepository;
 
-import jakarta.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class InvoiceService {
     @Autowired
     private InvoiceRepository invoiceRepository;
 
-    @Autowired
-    private EntityManager entityManager;
+    public List<Invoice> getAllInvoice() {
+        return invoiceRepository.findAll();
+    }
 
     public List<Invoice> getInvoicesByCustomerId(Long customerId) {
         return invoiceRepository.findByCustomerId(customerId);
