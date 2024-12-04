@@ -14,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.main.invenmbe.entity.InvoiceDetail;
 import com.main.invenmbe.service.InvoiceDetailService;
 
 @RestController
 @RequestMapping("/api/invoice-details")
 public class InvoiceDetailController {
-
+    private static final Logger log = LoggerFactory.getLogger(InvoiceDetailController.class);
+    
     private final InvoiceDetailService invoiceDetailService;
 
     public InvoiceDetailController(InvoiceDetailService invoiceDetailService) {
@@ -45,6 +49,8 @@ public class InvoiceDetailController {
             List<InvoiceDetail> details = invoiceDetailService.getDetailsByInvoiceId(invoiceId);
             return ResponseEntity.ok(details);
         } catch (Exception e) {
+            // 로그 추가
+            log.error("Error fetching invoice details: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Collections.emptyList());
         }

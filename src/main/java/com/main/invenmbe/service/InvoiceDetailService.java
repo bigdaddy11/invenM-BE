@@ -1,6 +1,7 @@
 package com.main.invenmbe.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,6 +14,7 @@ import com.main.invenmbe.repository.InvoiceDetailRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 
 @Service
 public class InvoiceDetailService {
@@ -36,7 +38,34 @@ public class InvoiceDetailService {
 
     // 송장 ID로 상세 조회
     public List<InvoiceDetail> getDetailsByInvoiceId(Long invoiceId) {
-        return invoiceDetailRepository.InvoiceDetailWithExtraFields(invoiceId);
+        Query query = entityManager.createNativeQuery(
+        "SELECT i.*, c.customer_name AS customer_name, p.invoice_name AS invoice_name " +
+        "FROM invoice_detail i " +
+        "LEFT JOIN customer c ON i.customer_id = c.id " +
+        "LEFT JOIN product p ON i.product_code = p.product_code " +
+        "WHERE i.invoice_id = :invoiceId",
+        "InvoiceDetailWithExtraFields"
+        );
+        query.setParameter("invoiceId", invoiceId);
+        
+        List<Object[]> results = query.getResultList(); // Object 배열 반환
+        List<InvoiceDetail> invoiceDetails = new ArrayList<>();
+
+    for (Object[] row : results) {
+        InvoiceDetail detail = (InvoiceDetail) row[0]; // i.*로 반환된 InvoiceDetail 엔티티
+
+        // 추가 필드 매핑
+        if (row[1] != null) {
+            detail.setCustomerName((String) row[1]); // customer_name
+        }
+        if (row[2] != null) {
+            detail.setInvoiceName((String) row[2]); // invoice_name
+        }
+
+        invoiceDetails.add(detail);
+    }
+
+    return invoiceDetails;
     }
 
     public void updateInvoiceDetails(List<InvoiceDetail> invoiceDetails) {

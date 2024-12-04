@@ -17,7 +17,7 @@ import jakarta.validation.constraints.Size;
     entities = @EntityResult(entityClass = InvoiceDetail.class),
     columns = {
         @ColumnResult(name = "customer_name", type = String.class),
-        @ColumnResult(name = "product_name", type = String.class)
+        @ColumnResult(name = "invoice_name", type = String.class)
     }
 )
 public class InvoiceDetail {
