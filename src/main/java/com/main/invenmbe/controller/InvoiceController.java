@@ -1,6 +1,7 @@
 package com.main.invenmbe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,17 @@ public class InvoiceController {
     public ResponseEntity<List<Invoice>> saveInvoices(@Validated @RequestBody List<Invoice> invoices) {
         List<Invoice> savedInvoices = invoiceService.saveAll(invoices);
         return ResponseEntity.ok(savedInvoices);
+    }
+
+    @PutMapping
+    public ResponseEntity<String> updateInvoices(@RequestBody List<Invoice> updates) {
+        try {
+            invoiceService.updateInvoices(updates);
+            return ResponseEntity.ok("송장이 성공적으로 수정되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("송장 수정 중 오류가 발생했습니다: " + e.getMessage());
+        }
     }
 
     @PostMapping("/delete")
